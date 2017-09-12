@@ -45,12 +45,14 @@ class TestBase(unittest.TestCase):
 
     """Initialization tests"""
     def test_empty_id(self):
-        base = Base()
+        self.base = Base()
         self.assertEqual(base.id, 1)
+        del self.base
 
     def test_pos_int_id(self):
-        base = Base(89)
+        self.base = Base(89)
         self.assertEqual(base.id, 89)
+        del self.base
 
 if __name__ == "__main__":
     unittest.main()
