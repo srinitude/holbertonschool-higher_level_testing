@@ -8,6 +8,7 @@ import inspect
 from models import place
 import pep8
 import unittest
+Place = place.Place
 
 
 class TestPlaceDocs(unittest.TestCase):
@@ -15,7 +16,7 @@ class TestPlaceDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        cls.base_f = inspect.getmembers(place, inspect.isfunction)
+        cls.base_f = inspect.getmembers(Place, inspect.isfunction)
 
     def test_pep8_conformance_place(self):
         """Test that models/place.py conforms to PEP8."""
@@ -40,7 +41,7 @@ class TestPlaceDocs(unittest.TestCase):
 
     def test_place_class_docstring(self):
         """Test for the Place class docstring"""
-        self.assertIsNot(place.__doc__, None,
+        self.assertIsNot(Place.__doc__, None,
                          "Place class needs a docstring")
-        self.assertTrue(len(place.__doc__) >= 1,
+        self.assertTrue(len(Place.__doc__) >= 1,
                         "Place class needs a docstring")

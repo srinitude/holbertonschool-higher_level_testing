@@ -8,6 +8,7 @@ import inspect
 from models import state
 import pep8
 import unittest
+State = state.State
 
 
 class TestStateDocs(unittest.TestCase):
@@ -15,7 +16,7 @@ class TestStateDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        cls.base_f = inspect.getmembers(state, inspect.isfunction)
+        cls.base_f = inspect.getmembers(State, inspect.isfunction)
 
     def test_pep8_conformance_state(self):
         """Test that models/state.py conforms to PEP8."""
@@ -40,7 +41,7 @@ class TestStateDocs(unittest.TestCase):
 
     def test_state_class_docstring(self):
         """Test for the State class docstring"""
-        self.assertIsNot(state.__doc__, None,
+        self.assertIsNot(State.__doc__, None,
                          "State class needs a docstring")
-        self.assertTrue(len(state.__doc__) >= 1,
+        self.assertTrue(len(State.__doc__) >= 1,
                         "State class needs a docstring")

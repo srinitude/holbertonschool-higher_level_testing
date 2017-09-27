@@ -8,6 +8,7 @@ import inspect
 from models import review
 import pep8
 import unittest
+Review = review.Review
 
 
 class TestReviewDocs(unittest.TestCase):
@@ -15,7 +16,7 @@ class TestReviewDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        cls.base_f = inspect.getmembers(review, inspect.isfunction)
+        cls.base_f = inspect.getmembers(Review, inspect.isfunction)
 
     def test_pep8_conformance_review(self):
         """Test that models/review.py conforms to PEP8."""
@@ -40,7 +41,7 @@ class TestReviewDocs(unittest.TestCase):
 
     def test_review_class_docstring(self):
         """Test for the State class docstring"""
-        self.assertIsNot(review.__doc__, None,
+        self.assertIsNot(Review.__doc__, None,
                          "Review class needs a docstring")
-        self.assertTrue(len(review.__doc__) >= 1,
+        self.assertTrue(len(Review.__doc__) >= 1,
                         "Review class needs a docstring")

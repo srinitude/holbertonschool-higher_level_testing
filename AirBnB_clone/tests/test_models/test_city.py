@@ -8,6 +8,7 @@ import inspect
 from models import city
 import pep8
 import unittest
+City = city.City
 
 
 class TestCityDocs(unittest.TestCase):
@@ -15,7 +16,7 @@ class TestCityDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        cls.base_f = inspect.getmembers(city, inspect.isfunction)
+        cls.base_f = inspect.getmembers(City, inspect.isfunction)
 
     def test_pep8_conformance_city(self):
         """Test that models/city.py conforms to PEP8."""
@@ -40,7 +41,7 @@ class TestCityDocs(unittest.TestCase):
 
     def test_city_class_docstring(self):
         """Test for the City class docstring"""
-        self.assertIsNot(city.__doc__, None,
+        self.assertIsNot(City.__doc__, None,
                          "City class needs a docstring")
-        self.assertTrue(len(city.__doc__) >= 1,
+        self.assertTrue(len(City.__doc__) >= 1,
                         "City class needs a docstring")
