@@ -8,6 +8,7 @@ import inspect
 from models import amenity
 import pep8
 import unittest
+Amenity = amenity.Amenity
 
 
 class TestAmenityDocs(unittest.TestCase):
@@ -15,7 +16,7 @@ class TestAmenityDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        cls.base_f = inspect.getmembers(amenity, inspect.isfunction)
+        cls.base_f = inspect.getmembers(Amenity, inspect.isfunction)
 
     def test_pep8_conformance_amenity(self):
         """Test that models/amenity.py conforms to PEP8."""
@@ -40,16 +41,7 @@ class TestAmenityDocs(unittest.TestCase):
 
     def test_amenity_class_docstring(self):
         """Test for the Amenity class docstring"""
-        self.assertIsNot(amenity.__doc__, None,
+        self.assertIsNot(Amenity.__doc__, None,
                          "Amenity class needs a docstring")
-        self.assertTrue(len(amenity.__doc__) >= 1,
+        self.assertTrue(len(Amenity.__doc__) >= 1,
                         "Amenity class needs a docstring")
-
-
-    # def test_Amenity_func_docstrings(self):
-    #     """Test for the presence of docstrings in Amenity methods"""
-    #     for func in self.base_f:
-    #         self.assertIsNot(func[1].__doc__, None,
-    #                          "{:s} method needs a docstring".format(func[0]))
-    #         self.assertTrue(len(func[1].__doc__) >= 1,
-    #                         "{:s} method needs a docstring".format(func[0]))
