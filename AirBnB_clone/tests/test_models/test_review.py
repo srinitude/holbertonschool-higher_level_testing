@@ -12,7 +12,7 @@ Review = review.Review
 
 
 class TestReviewDocs(unittest.TestCase):
-    """Tests to check the documentation and style of State class"""
+    """Tests to check the documentation and style of Review class"""
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
@@ -40,7 +40,7 @@ class TestReviewDocs(unittest.TestCase):
                         "review.py needs a docstring")
 
     def test_review_class_docstring(self):
-        """Test for the State class docstring"""
+        """Test for the Review class docstring"""
         self.assertIsNot(Review.__doc__, None,
                          "Review class needs a docstring")
         self.assertTrue(len(Review.__doc__) >= 1,

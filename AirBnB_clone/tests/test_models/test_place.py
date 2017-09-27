@@ -12,7 +12,7 @@ Place = place.Place
 
 
 class TestPlaceDocs(unittest.TestCase):
-    """Tests to check the documentation and style of State class"""
+    """Tests to check the documentation and style of Place class"""
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
@@ -35,7 +35,7 @@ class TestPlaceDocs(unittest.TestCase):
     def test_place_module_docstring(self):
         """Test for the place.py module docstring"""
         self.assertIsNot(place.__doc__, None,
-                         "state.py needs a docstring")
+                         "place.py needs a docstring")
         self.assertTrue(len(place.__doc__) >= 1,
                         "place.py needs a docstring")
 
