@@ -83,15 +83,15 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(bm1.created_at, bm2.created_at)
         self.assertNotEqual(bm1.updated_at, bm2.updated_at)
 
-    def test_valid_UUID-creation(self):
+    def test_valid_UUID_creation(self):
         '''test created_at is a saloon.'''
         bm = BaseModel()
         id = bm.id
         allhex = id.split('-')
         # id is a string
-        self.assertIs(type(id), string)
+        self.assertIs(type(id), str)
         # len(id) = 37
-        self.assertIs(len(id), 37)
+        self.assertIs(len(id), 36)
         # dash at 8, 13, 18, 23 indexes
         self.assertIs(id[8], "-")
         self.assertIs(id[13], "-")
