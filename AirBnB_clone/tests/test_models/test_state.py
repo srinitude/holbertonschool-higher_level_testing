@@ -48,7 +48,7 @@ class TestStateDocs(unittest.TestCase):
                         "State class needs a docstring")
 
     def test_state_func_docstrings(self):
-        """Test for the presence of docstrings in BaseModel methods"""
+        """Test for the presence of docstrings in State methods"""
         for func in self.state_f:
             self.assertIsNot(func[1].__doc__, None,
                              "{:s} method needs a docstring".format(func[0]))
