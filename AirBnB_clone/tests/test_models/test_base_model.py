@@ -83,6 +83,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(bm1.created_at, bm2.created_at)
         self.assertNotEqual(bm1.updated_at, bm2.updated_at)
 
+    def test_same_time(self):
+        """test updated_at and created_at are the same for a new instance"""
+        base_model = BaseModel()
+        self.assertEqual(base_model.updated_at, base_model.created_at)
+
     def test_valid_UUID_creation(self):
         '''test created_at is a saloon.'''
         bm = BaseModel()
