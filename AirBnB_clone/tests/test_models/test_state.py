@@ -59,5 +59,15 @@ class TestStateDocs(unittest.TestCase):
 class TestState(unittest.TestCase):
     """Test the State class"""
     def test_is_subclass(self):
+        """Test that State is a subclass of BaseModel"""
         state = State()
         self.assertIsInstance(state, BaseModel)
+        self.assertTrue(hasattr(state, "id"))
+        self.assertTrue(hasattr(state, "created_at"))
+        self.assertTrue(hasattr(state, "updated_at"))
+
+    def test_name_attr(self):
+        """Test that State has attribute name, and it's as an empty string"""
+        state = State()
+        self.assertTrue(hasattr(state, "name"))
+        self.assertEqual(state.name, "")
