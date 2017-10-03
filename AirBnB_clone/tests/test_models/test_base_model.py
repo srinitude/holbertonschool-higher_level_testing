@@ -1,8 +1,4 @@
 #!/usr/bin/python3
-"""
-Contains the TestBaseModel and TestBaseModelDocs classes
-"""
-
 from datetime import datetime
 import inspect
 from models import base_model
@@ -82,6 +78,33 @@ class TestBaseModel(unittest.TestCase):
         bm2 = BaseModel()
         self.assertNotEqual(bm1.created_at, bm2.created_at)
         self.assertNotEqual(bm1.updated_at, bm2.updated_at)
+        
+    def test_to_dict(self):
+        """Test conversion of object attributes to dictionary for json"""
+        my_model = BaseModel()
+        my_model.name = "Holberton"
+        my_model.my_number = 89
+        d = my_model.to_dict()
+        expected_attrs = ["id",
+                          "created_at",
+                          "updated_at",
+                          "name",
+                          "my_number",
+                          "__class__"]
+        self.assertCountEqual(d.keys(), expected_attrs)
+        self.assertEqual(d['__class__'], 'BaseModel')
+        self.assertEqual(d['name'], "Holberton")
+        self.assertEqual(d['my_number'] = 89)
+
+    def test_date_differences(self):
+        """Test use of datetime for `created_at` attribute"""
+        my_model = BaseModel()
+        now = datetime.now()
+        self.assertTrue(type(my_model.created_at) == type(now))
+        self.assertTrue(type(my_model.updated_at) == type(now))
+        self.assertEqual(my_model.created_at, my_model.updated_at)
+        delta = now - my_model.created_at
+        self.assertAlmostEqual(delta.total_seconds(), 0.0, delta = 1e-2)
 
     def test_valid_UUID_creation(self):
         '''test created_at is a saloon.'''
