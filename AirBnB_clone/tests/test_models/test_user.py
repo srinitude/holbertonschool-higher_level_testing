@@ -16,7 +16,7 @@ class TestUserDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        cls.base_f = inspect.getmembers(User, inspect.isfunction)
+        cls.user_f = inspect.getmembers(User, inspect.isfunction)
 
     def test_pep8_conformance_user(self):
         """Test that models/user.py conforms to PEP8."""
@@ -45,3 +45,11 @@ class TestUserDocs(unittest.TestCase):
                          "User class needs a docstring")
         self.assertTrue(len(User.__doc__) >= 1,
                         "User class needs a docstring")
+
+    def test_user_func_docstrings(self):
+        """Test for the presence of docstrings in User methods"""
+        for func in self.user_f:
+            self.assertIsNot(func[1].__doc__, None,
+                             "{:s} method needs a docstring".format(func[0]))
+            self.assertTrue(len(func[1].__doc__) >= 1,
+                            "{:s} method needs a docstring".format(func[0]))
