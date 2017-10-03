@@ -91,3 +91,9 @@ class TestState(unittest.TestCase):
         self.assertEqual(type(new_d["updated_at"]), str)
         self.assertEqual(new_d["created_at"], s.created_at.strftime(t_format))
         self.assertEqual(new_d["updated_at"], s.updated_at.strftime(t_format))
+
+    def test_str(self):
+        """test that the str method has the correct output"""
+        state = State()
+        string = "[State] ({}) {}".format(state.id, state.__dict__)
+        self.assertEqual(string, str(state))

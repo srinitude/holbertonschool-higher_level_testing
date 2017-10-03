@@ -149,3 +149,9 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(new_d["updated_at"]), str)
         self.assertEqual(new_d["created_at"], bm.created_at.strftime(t_format))
         self.assertEqual(new_d["updated_at"], bm.updated_at.strftime(t_format))
+
+    def test_str(self):
+        """test that the str method has the correct output"""
+        bm = BaseModel()
+        string = "[BaseModel] ({}) {}".format(bm.id, bm.__dict__)
+        self.assertEqual(string, str(bm))
