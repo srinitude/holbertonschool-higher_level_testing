@@ -94,7 +94,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertCountEqual(d.keys(), expected_attrs)
         self.assertEqual(d['__class__'], 'BaseModel')
         self.assertEqual(d['name'], "Holberton")
-        self.assertEqual(d['my_number'] = 89)
+        self.assertEqual(d['my_number'], 89)
 
     def test_date_differences(self):
         """Test use of datetime for `created_at` attribute"""
