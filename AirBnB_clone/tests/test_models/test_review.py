@@ -46,7 +46,7 @@ class TestReviewDocs(unittest.TestCase):
         self.assertTrue(len(Review.__doc__) >= 1,
                         "Review class needs a docstring")
 
-        def test_review_func_docstrings(self):
+    def test_review_func_docstrings(self):
         """Test for the presence of docstrings in Review methods"""
         for func in self.review_f:
             self.assertIsNot(func[1].__doc__, None,
