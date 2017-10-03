@@ -6,6 +6,7 @@ Contains the TestReviewDocs classes
 from datetime import datetime
 import inspect
 from models import review
+from models.base_model import BaseModel
 import pep8
 import unittest
 Review = review.Review
@@ -53,3 +54,32 @@ class TestReviewDocs(unittest.TestCase):
                              "{:s} method needs a docstring".format(func[0]))
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
+
+
+class TestReview(unittest.TestCase):
+    """Test the Review class"""
+    def test_is_subclass(self):
+        """Test if Review is a subclass of BaseModel"""
+        review = Review()
+        self.assertIsInstance(review, BaseModel)
+        self.assertTrue(hasattr(review, "id"))
+        self.assertTrue(hasattr(review, "created_at"))
+        self.assertTrue(hasattr(review, "updated_at"))
+
+    def test_place_id_attr(self):
+        """Test Review has attr place_id, and it's an empty string"""
+        review = Review()
+        self.assertTrue(hasattr(review, "place_id"))
+        self.assertEqual(review.place_id, "")
+
+    def test_user_id_attr(self):
+        """Test Review has attr user_id, and it's an empty string"""
+        review = Review()
+        self.assertTrue(hasattr(review, "user_id"))
+        self.assertEqual(review.user_id, "")
+
+    def test_text_attr(self):
+        """Test Review has attr text, and it's an empty string"""
+        review = Review()
+        self.assertTrue(hasattr(review, "text"))
+        self.assertEqual(review.text, "")
