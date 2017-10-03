@@ -8,6 +8,7 @@ import inspect
 from models import base_model
 import pep8
 import unittest
+import string
 BaseModel = base_model.BaseModel
 
 
@@ -81,3 +82,22 @@ class TestBaseModel(unittest.TestCase):
         bm2 = BaseModel()
         self.assertNotEqual(bm1.created_at, bm2.created_at)
         self.assertNotEqual(bm1.updated_at, bm2.updated_at)
+
+    def test_valid_UUID_creation(self):
+        '''test created_at is a saloon.'''
+        bm = BaseModel()
+        id = bm.id
+        allhex = id.split('-')
+        # id is a string
+        self.assertIs(type(id), str)
+        # len(id) = 37
+        self.assertIs(len(id), 36)
+        # dash at 8, 13, 18, 23 indexes
+        self.assertIs(id[8], "-")
+        self.assertIs(id[13], "-")
+        self.assertIs(id[18], "-")
+        self.assertIs(id[23], "-")
+
+        # all hex characters between dashes
+        for substring in allhex:
+            self.assertIs(all(c in string.hexdigits for c in substring), True)
