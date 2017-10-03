@@ -6,6 +6,7 @@ Contains the TestStateDocs classes
 from datetime import datetime
 import inspect
 from models import state
+from models.base_model import BaseModel
 import pep8
 import unittest
 State = state.State
@@ -16,7 +17,7 @@ class TestStateDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        cls.base_f = inspect.getmembers(State, inspect.isfunction)
+        cls.state_f = inspect.getmembers(State, inspect.isfunction)
 
     def test_pep8_conformance_state(self):
         """Test that models/state.py conforms to PEP8."""
@@ -45,3 +46,18 @@ class TestStateDocs(unittest.TestCase):
                          "State class needs a docstring")
         self.assertTrue(len(State.__doc__) >= 1,
                         "State class needs a docstring")
+
+    def test_state_func_docstrings(self):
+        """Test for the presence of docstrings in BaseModel methods"""
+        for func in self.state_f:
+            self.assertIsNot(func[1].__doc__, None,
+                             "{:s} method needs a docstring".format(func[0]))
+            self.assertTrue(len(func[1].__doc__) >= 1,
+                            "{:s} method needs a docstring".format(func[0]))
+
+
+class TestState(unittest.TestCase):
+    """Test the State class"""
+    def test_is_subclass(self):
+        state = State()
+        self.assertIsInstance(state, BaseModel)
