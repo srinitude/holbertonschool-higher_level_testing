@@ -106,3 +106,23 @@ class TestBaseModel(unittest.TestCase):
         # all hex characters between dashes
         for substring in allhex:
             self.assertIs(all(c in string.hexdigits for c in substring), True)
+
+    def test_to_dict_creates_dict(self):
+        """test to_dict method creates a dictionary with proper attrs"""
+        bm = BaseModel()
+        new_d = bm.to_dict()
+        self.assertEqual(type(new_d), dict)
+        for attr in bm.__dict__:
+            self.assertTrue(attr in new_d)
+        self.assertTrue("__class__" in new_d)
+
+    def test_to_dict_values(self):
+        """test that values in dict returned from to_dict are correct"""
+        t_format = "%Y-%m-%dT%H:%M:%S.%f"
+        bm = BaseModel()
+        new_d = bm.to_dict()
+        self.assertEqual(new_d["__class__"], "BaseModel")
+        self.assertEqual(type(new_d["created_at"]), str)
+        self.assertEqual(type(new_d["updated_at"]), str)
+        self.assertEqual(new_d["created_at"], bm.created_at.strftime(t_format))
+        self.assertEqual(new_d["updated_at"], bm.updated_at.strftime(t_format))
