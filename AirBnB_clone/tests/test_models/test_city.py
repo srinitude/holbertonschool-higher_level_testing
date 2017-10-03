@@ -6,6 +6,7 @@ Contains the TestCityDocs classes
 from datetime import datetime
 import inspect
 from models import city
+from models.base_model import BaseModel
 import pep8
 import unittest
 City = city.City
@@ -53,3 +54,26 @@ class TestCityDocs(unittest.TestCase):
                              "{:s} method needs a docstring".format(func[0]))
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
+
+
+class TestCity(unittest.TestCase):
+    """Test the City class"""
+    def test_is_subclass(self):
+        """Test that City is a subclass of BaseModel"""
+        city = City()
+        self.assertIsInstance(city, BaseModel)
+        self.assertTrue(hasattr(city, "id"))
+        self.assertTrue(hasattr(city, "created_at"))
+        self.assertTrue(hasattr(city, "updated_at"))
+
+    def test_name_attr(self):
+        """Test that City has attribute name, and it's an empty string"""
+        city = City()
+        self.assertTrue(hasattr(city, "name"))
+        self.assertEqual(city.name, "")
+
+    def test_state_id_attr(self):
+        """Test that City has attribute state_id, and it's an empty string"""
+        city = City()
+        self.assertTrue(hasattr(city, "state_id"))
+        self.assertEqual(city.state_id, "")
