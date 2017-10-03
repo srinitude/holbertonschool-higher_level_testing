@@ -78,7 +78,7 @@ class TestBaseModel(unittest.TestCase):
         bm2 = BaseModel()
         self.assertNotEqual(bm1.created_at, bm2.created_at)
         self.assertNotEqual(bm1.updated_at, bm2.updated_at)
-        
+
     def test_to_dict(self):
         """Test conversion of object attributes to dictionary for json"""
         my_model = BaseModel()
@@ -104,7 +104,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(type(my_model.updated_at) == type(now))
         self.assertEqual(my_model.created_at, my_model.updated_at)
         delta = now - my_model.created_at
-        self.assertAlmostEqual(delta.total_seconds(), 0.0, delta = 1e-2)
+        self.assertAlmostEqual(delta.total_seconds(), 0.0, delta=1e-2)
 
     def test_valid_UUID_creation(self):
         '''test created_at is a saloon.'''
