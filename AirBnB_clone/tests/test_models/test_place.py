@@ -9,6 +9,7 @@ from models import place
 from models.base_model import BaseModel
 import pep8
 import unittest
+import os
 Place = place.Place
 
 
@@ -17,6 +18,7 @@ class TestPlaceDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
+        os.remove("file.json")
         cls.place_f = inspect.getmembers(Place, inspect.isfunction)
 
     def test_pep8_conformance_place(self):

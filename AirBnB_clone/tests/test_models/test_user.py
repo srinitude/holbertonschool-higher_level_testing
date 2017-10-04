@@ -9,6 +9,7 @@ from models import user
 from models.base_model import BaseModel
 import pep8
 import unittest
+import os
 User = user.User
 
 
@@ -17,6 +18,7 @@ class TestUserDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
+        os.remove("file.json")
         cls.user_f = inspect.getmembers(User, inspect.isfunction)
 
     def test_pep8_conformance_user(self):
