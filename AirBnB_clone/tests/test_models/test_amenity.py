@@ -9,6 +9,7 @@ from models import amenity
 from models.base_model import BaseModel
 import pep8
 import unittest
+import os
 Amenity = amenity.Amenity
 
 
@@ -17,6 +18,7 @@ class TestAmenityDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
+        os.remove("file.json")
         cls.amenity_f = inspect.getmembers(Amenity, inspect.isfunction)
 
     def test_pep8_conformance_amenity(self):
