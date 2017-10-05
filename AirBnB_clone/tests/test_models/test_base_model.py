@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 """Test BaseModel for expected behavior and documentation"""
+from datetime import datetime
+import inspect
+import models
+import pycodestyle
+import time
 import unittest
 from unittest import mock
-from models.base_model import __doc__ as module_doc
-import models
-from datetime import datetime
-import pycodestyle
-import inspect
-import time
-BaseModel = models.BaseModel
+BaseModel = models.base_model.BaseModel
+module_doc = models.base_model.__doc__
 
 
 class TestBaseModelDocs(unittest.TestCase):
