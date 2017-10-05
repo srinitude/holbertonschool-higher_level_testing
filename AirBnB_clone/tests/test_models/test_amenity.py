@@ -9,7 +9,6 @@ from models import amenity
 from models.base_model import BaseModel
 import pep8
 import unittest
-import os
 Amenity = amenity.Amenity
 
 
@@ -18,7 +17,6 @@ class TestAmenityDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        os.remove("file.json")
         cls.amenity_f = inspect.getmembers(Amenity, inspect.isfunction)
 
     def test_pep8_conformance_amenity(self):
@@ -61,6 +59,7 @@ class TestAmenityDocs(unittest.TestCase):
 class TestAmenity(unittest.TestCase):
     """Test the Amenity class"""
     def test_is_subclass(self):
+        """Test that Amenity is a subclass of BaseModel"""
         amenity = Amenity()
         self.assertIsInstance(amenity, BaseModel)
         self.assertTrue(hasattr(amenity, "id"))
