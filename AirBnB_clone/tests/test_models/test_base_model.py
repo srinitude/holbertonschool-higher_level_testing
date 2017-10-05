@@ -62,6 +62,12 @@ class TestBaseModel(unittest.TestCase):
         base_model = BaseModel()
         self.assertEqual(type(base_model), BaseModel)
 
+    def test_instance_id(self):
+        """ Test that two BaseModel instances don't have the same ID """
+        inst1 = BaseModel()
+        inst2 = BaseModel()
+        self.assertNotEqual(inst1.id, inst2.id)
+
     def test_created_at_instantiation(self):
         """test created_at is a pub. instance attribute of type datetime"""
         base_model = BaseModel()
