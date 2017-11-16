@@ -13,6 +13,8 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+import json
+import os
 import pep8
 import unittest
 FileStorage = file_storage.FileStorage
@@ -67,17 +69,24 @@ test_file_storage.py'])
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
-    def test_all_returns_dict(self):
+    def test_all(self):
         """Test that all returns the FileStorage.__objects attr"""
         storage = FileStorage()
         new_dict = storage.all()
         self.assertEqual(type(new_dict), dict)
         self.assertIs(new_dict, storage._FileStorage__objects)
+        """Testing that all with cls passed as arg returns all cls objs"""
+        for key, value in classes.items():
+            with self.subTest(key=key, value=value):
+                instance = value()
+                storage.new(instance)
+                self.assertIn(instance, storage.all(instance).values())
 
     def test_new(self):
         """test that new adds an object to the FileStorage.__objects attr"""
         storage = FileStorage()
-        storage._FileStorage__objects = {}
+        save = FileStorage._FileStorage__objects
+        FileStorage._FileStorage__objects = {}
         test_dict = {}
         for key, value in classes.items():
             with self.subTest(key=key, value=value):
@@ -86,4 +95,39 @@ class TestFileStorage(unittest.TestCase):
                 storage.new(instance)
                 test_dict[instance_key] = instance
                 self.assertEqual(test_dict, storage._FileStorage__objects)
-        storage._FileStorage__objects = {}
+        FileStorage._FileStorage__objects = save
+
+    def test_save(self):
+        """Test that save properly saves objects to file.json"""
+        os.remove("file.json")
+        storage = FileStorage()
+        new_dict = {}
+        for key, value in classes.items():  # init instances
+            instance = value()
+            instance_key = instance.__class__.__name__ + "." + instance.id
+            new_dict[instance_key] = instance
+        save = FileStorage._FileStorage__objects
+        FileStorage._FileStorage__objects = new_dict  # adding test inst to __obj
+        storage.save()
+        FileStorage._FileStorage__objects = save
+        for key, value in new_dict.items():
+            new_dict[key] = value.to_dict()
+        string = json.dumps(new_dict)
+        with open("file.json", "r") as f:
+            js = f.read()
+        self.assertEqual(json.loads(string), json.loads(js))
+
+    def test_delete(self):
+        """test that delete deletes passed object from FileStorage.__objects attr"""
+        os.remove("file.json")
+        storage = FileStorage()
+        objs = FileStorage._FileStorage__objects
+        test_state = classes.get("State")()
+        test_state.name = "Lionvil"
+        storage.new(test_state)
+        storage.save()
+        fs_inst = FileStorage._FileStorage__objects.values()
+        self.assertIn(test_state, fs_inst)
+        storage.delete(test_state)
+        self.assertNotIn(test_state, FileStorage._FileStorage__objects.values())
+
